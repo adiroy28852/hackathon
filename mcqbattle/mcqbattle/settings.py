@@ -141,4 +141,4 @@ REST_FRAMEWORK = {
 
 
 
-BARD_API_KEY= "AIzaSyD_5VQeDJ_c2Ev_ufVLXoJl98n_by2Aumc"
+BARD_API_KEY= "key here. in my clipboard currently else google cloud dashboard"
