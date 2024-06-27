@@ -14,18 +14,23 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-# urls.py
-from django.contrib import admin
-from django.urls import path
+# mcqbattle/urls.py
 
+from django.contrib import admin
+from django.urls import path, include
 from auth_app.views import LoginView, ProtectedView, RegisterView
 from mcqs.views import MCQListCreateView, MCQRetrieveUpdateDestroyView
+from quizrooms import urls as quizroom_urls  # Import quizroom urls
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
-    path("register", RegisterView.as_view(), name="register"),
-    path("login", LoginView.as_view(), name="login"),
-    path("protected", ProtectedView.as_view(), name="protected"),
-    path("mcqs", MCQListCreateView.as_view(), name="mcq-list-create"),
-    path("mcqs/<uuid:pk>", MCQRetrieveUpdateDestroyView.as_view(), name="mcq-detail"),
+    path('admin/', admin.site.urls),
+    path('quiz-room/', include('quizrooms.urls')),  # Include quiz room URLs
+    path('register/', RegisterView.as_view(), name='register'),
+    path('login/', LoginView.as_view(), name='login'),
+    path('protected/', ProtectedView.as_view(), name='protected'),
+    path('mcqs/', MCQListCreateView.as_view(), name='mcq-list-create'),
+    path('mcqs/<uuid:pk>/', MCQRetrieveUpdateDestroyView.as_view(), name='mcq-detail'),
 ]
+
+# Append the urlpatterns from quizroom_urls
+urlpatterns += quizroom_urls.urlpatterns

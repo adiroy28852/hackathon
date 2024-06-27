@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'mcqs',
+    'quizrooms', 
     'rest_framework_simplejwt',
     'rest_framework',
     'auth_app',
@@ -137,3 +138,7 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
 }
+
+
+
+BARD_API_KEY= "AIzaSyD_5VQeDJ_c2Ev_ufVLXoJl98n_by2Aumc"
