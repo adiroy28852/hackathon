@@ -4,7 +4,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Urls } from "../../constant/Urls";
-import { signup } from "../../services/api/auth/auth.service"; // Import the signup service
+import { Signup } from "../../services/api/auth/auth.service"; // Import the signup service
 
 const SignupComponent = () => {
   const [form] = Form.useForm();
@@ -12,7 +12,7 @@ const SignupComponent = () => {
 
   const onFinish = async (values) => {
     try {
-      const response = await signup(values); // Use the signup service
+      const response = await Signup(values); // Use the signup service
       toast.success("Signup successful! Please login to continue.");
       navigate(Urls.Login());
     } catch (err) {

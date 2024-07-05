@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Urls } from "../../constant/Urls";
 import AuthContext from "../../contexts/auth.context";
-import AuthCookies from "../../services/cookie/authToken.cookie";
+import {ClearAll} from "../../services/cookie/authToken.cookie";
 
 const Navbar = () => {
   const { isLoggedInUser, setIsLoggedInUser } = useContext(AuthContext); // Get auth state and updater from context
@@ -32,7 +32,7 @@ const Navbar = () => {
           label: (
             <div
               onClick={() => {
-                AuthCookies.ClearAll(); // Clear auth cookies
+                ClearAll(); // Clear auth cookies
                 setIsLoggedInUser(null); // Update auth state to logged out
                 navigate(Urls.Login()); // Navigate to login page
               }}

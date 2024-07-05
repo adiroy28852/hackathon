@@ -5,8 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Urls } from "../../constant/Urls";
 import AuthContext from "../../contexts/auth.context";
-import { login } from "../../services/api/auth/auth.service"; // Import the login service
-import AuthCookies from "../../services/cookie/authToken.cookie";
+import { Login } from "../../services/api/auth/auth.service"; // Import the login service
+import {SetAccessToken, SetRefreshToken} from "../../services/cookie/authToken.cookie";
 
 const LoginComponent = () => {
   const { setIsLoggedInUser } = useContext(AuthContext);
@@ -14,9 +14,9 @@ const LoginComponent = () => {
 
   const onFinish = async (values) => {
     try {
-      const response = await login(values); // Use the login service
-      AuthCookies.SetAccessToken(response.data.access);
-      AuthCookies.SetRefreshToken(response.data.refresh);
+      const response = await Login(values); // Use the login service
+      SetAccessToken(response.data.access);
+      SetRefreshToken(response.data.refresh);
       setIsLoggedInUser(true);
       toast.success("Login successful!");
       navigate(Urls.Home());
