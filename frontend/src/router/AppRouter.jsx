@@ -13,9 +13,9 @@ import ProtectedRoute from "./ProtectedRoute";
 const AppRouter = () => {
   return (
     <Routes>
+      <Route path={Urls.Login()} element={<LoginPage />} />
       <Route path={Urls.Home()} element={<HomePage />} />
       <Route path={Urls.Signup()} element={<SignupPage />} />
-      <Route path={Urls.Login()} element={<LoginPage />} />
 
       <Route
         path={Urls.Mcqs.Mcqs()}

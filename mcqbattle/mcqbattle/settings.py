@@ -32,7 +32,6 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'mcqs',
-    'quizrooms', 
     'rest_framework_simplejwt',
     'rest_framework',
     'auth_app',
@@ -146,5 +145,5 @@ REST_FRAMEWORK = {
 BARD_API_KEY= "key here. in my clipboard currently else google cloud dashboard"
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
-    "http://127.0.0.1:8080"
+    "http://127.0.0.1:8080/login"
 ]
