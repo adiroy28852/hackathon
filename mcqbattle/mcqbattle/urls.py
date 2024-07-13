@@ -1,10 +1,10 @@
 # urls.py
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 from auth_app.views import LoginView, ProtectedView, RegisterView
 from mcqs.views import MCQListCreateView, MCQRetrieveUpdateDestroyView
-
+from lobby import views
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("register", RegisterView.as_view(), name="register"),
@@ -12,4 +12,5 @@ urlpatterns = [
     path("protected", ProtectedView.as_view(), name="protected"),
     path("mcqs", MCQListCreateView.as_view(), name="mcq-list-create"),
     path("mcqs/<uuid:pk>", MCQRetrieveUpdateDestroyView.as_view(), name="mcq-detail"),
+    path('', include('lobby.urls')), 
 ]
