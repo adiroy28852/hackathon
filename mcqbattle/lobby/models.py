@@ -1,10 +1,7 @@
 from django.db import models
 from django.conf import settings
 import uuid
-
-from django.db import models
-from django.conf import settings
-import uuid
+import json
 
 class BaseLobby(models.Model):
     STATUS_CHOICES = [
@@ -23,6 +20,11 @@ class BaseLobby(models.Model):
 
     def __str__(self):
         return self.subject
+
+    def get_active_participants(self):
+        """Returns a list of active participants."""
+        participants_list = json.loads(self.participants)
+        return participants_list  # Assuming participants is a list of dicts with 'uuid' and 'is_active' keys
 
 # class publiclobby(BaseLobby):
 #     def host(self):

@@ -1,4 +1,5 @@
 import { Cookies } from "react-cookie";
+
 const cookies = new Cookies();
 
 const SetAccessToken = (accessToken) => {
@@ -29,6 +30,14 @@ const ClearAll = () => {
 };
 
 export {
+  SetAccessToken,
+  GetAccessToken,
+  GetRefreshToken,
+  ClearAll,
+  SetRefreshToken,
+};
+
+export default {
   SetAccessToken,
   GetAccessToken,
   GetRefreshToken,

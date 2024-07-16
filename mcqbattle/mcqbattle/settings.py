@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'game_logic',
     'mcqs',
     'rest_framework_simplejwt',
     'rest_framework',
