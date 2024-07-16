@@ -11,12 +11,15 @@ const SignupComponent = () => {
   const navigate = useNavigate();
 
   const onFinish = async (values) => {
+    console.log("Form values: ", values); // Log form values
     try {
       const response = await Signup(values); // Use the signup service
+      console.log("Signup response: ", response); // Log the response
       toast.success("Signup successful! Please login to continue.");
       navigate(Urls.Login());
     } catch (err) {
-      toast.error(err?.response?.data?.error);
+      console.error("Signup error: ", err); // Log the error
+      toast.error(err?.response?.data?.error || "Signup failed!");
     }
   };
 

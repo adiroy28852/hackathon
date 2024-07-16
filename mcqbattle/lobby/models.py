@@ -2,12 +2,24 @@ from django.db import models
 from django.conf import settings
 import uuid
 
+from django.db import models
+from django.conf import settings
+import uuid
+
 class BaseLobby(models.Model):
+    STATUS_CHOICES = [
+        ('waiting', 'Waiting'),
+        ('open', 'Open'),
+        ('session_full', 'Session Full'),
+        # Add more choices as needed
+    ]
+
     subject = models.CharField(max_length=50)
     participants = models.TextField(default='[]')  # Default to empty list in JSON format
     is_active = models.BooleanField(default=True)
     lobbyID = models.UUIDField(primary_key=True, editable=False, unique=True, default=uuid.uuid4)
     host = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='waiting')
 
     def __str__(self):
         return self.subject

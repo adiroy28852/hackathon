@@ -9,4 +9,4 @@ class LobbySerializer(serializers.ModelSerializer):
 class CreatePrivateLobbySerializer(serializers.ModelSerializer):
     class Meta:
         model = BaseLobby
-        fields = ['subject']  # Include other required fields if necessary
+        fields = ['subject', 'status']  # Include other required fields if necessary
