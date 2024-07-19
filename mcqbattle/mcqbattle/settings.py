@@ -144,8 +144,8 @@ REST_FRAMEWORK = {
 
 
 
-BARD_API_KEY= "key here. in my clipboard currently else google cloud dashboard"
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
-    "http://127.0.0.1:8080/login"
-]
+# pusher config
+# PUSHER_APP_ID = 'your_pusher_app_id'
+# PUSHER_KEY = 'your_pusher_key'
+# PUSHER_SECRET = 'your_pusher_secret'
+# PUSHER_CLUSTER = 'your_pusher_cluster'
