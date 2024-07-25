@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import AuthContext from "../contexts/auth.context";
+import AuthContext from "../context/auth.context";
 import { Protected } from "../services/api/auth/auth.service";
 
 const AuthProvider = ({ children }) => {

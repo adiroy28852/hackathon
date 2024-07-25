@@ -2,7 +2,7 @@ import { Menu } from "antd";
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Urls } from "../../constant/Urls";
-import AuthContext from "../../contexts/auth.context";
+import AuthContext from "../../context/auth.context";
 import AuthCookies from "../../services/cookie/authToken.cookie";
 
 
