@@ -4,7 +4,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Urls } from "../../constant/Urls";
-import { signup } from "../../services/api/authService"; // Import the signup service
+import { Signup } from "../../services/api/auth/auth.service"; // Import the signup service
 
 const SignupComponent = () => {
   const [form] = Form.useForm();

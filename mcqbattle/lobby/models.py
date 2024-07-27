@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.contrib.auth.models import User
 import uuid
 import json
 
@@ -26,13 +27,24 @@ class BaseLobby(models.Model):
         participants_list = json.loads(self.participants)
         return participants_list  # Assuming participants is a list of dicts with 'uuid' and 'is_active' keys
 
-# class publiclobby(BaseLobby):
-#     def host(self):
-#         participants_list = json.loads(self.participants)
-#         if(participants_list):
-#             return participants_list[0]
-#         return None
-    
-# class privatelobby(BaseLobby):
-#     key= models.CharField(max_length=30)
-#     host = models.ForeignKey(User, on_delete=models.CASCADE, related_name='hosted_lobbies')
+    def add_participant(self, user):
+        participants_list = json.loads(self.participants)
+        if len(participants_list) < self.lobbySize:
+            participants_list.append({'uuid': str(user.id), 'is_active': True})
+            self.participants = json.dumps(participants_list)
+            self.save()
+            return True
+        return False
+
+class JoinRequest(models.Model):
+    lobby = models.ForeignKey(BaseLobby, on_delete=models.CASCADE, related_name='join_requests')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='join_requests')
+    created_at = models.DateTimeField(auto_now_add=True)
+    approved = models.BooleanField(default=False)
+
+    def approve(self):
+        if self.lobby.add_participant(self.user):
+            self.approved = True
+            self.save()
+            return True
+        return False

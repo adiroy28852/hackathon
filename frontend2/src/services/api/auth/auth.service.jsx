@@ -1,4 +1,4 @@
-import axiosInstance from "../axiosInstance";
+import axiosInstance from "../axios-instance";
 
 // Registers a new user by sending their details to the `/register` endpoint
 export const Signup = async (data) => {

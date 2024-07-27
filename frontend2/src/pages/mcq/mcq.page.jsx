@@ -1,5 +1,5 @@
 import React from "react";
-import MCQDetails from "../../components/mcq/MCQDetails";
+import MCQDetails from "../../components/mcq/McqDetails";
 
 const McqPage = () => {
   return <MCQDetails />;

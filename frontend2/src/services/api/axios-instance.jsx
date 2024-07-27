@@ -1,6 +1,6 @@
 // src/services/api/axios-instance.js
 import axios from "axios";
-import AuthCookies from "../cookie/AuthCookies";
+import AuthCookies from "../cookie/authToken.cookie";
 const BASE_URL = import.meta.env.VITE_BASE_API_URL;
 
 // Create an Axios instance

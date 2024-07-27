@@ -4,9 +4,10 @@ from rest_framework.response import Response
 from rest_framework import generics
 from rest_framework import status
 from .models import BaseLobby
-from .serializers import LobbySerializer, CreatePrivateLobbySerializer
+from .serializers import *
 from rest_framework.permissions import IsAuthenticated
 import uuid
+from views import *
 
 class ShowAllLobbies(generics.ListAPIView):
     queryset = BaseLobby.objects.all()
@@ -61,6 +62,37 @@ class GetLobby(APIView):
 
         return Response({'error': 'Lobby not found'}, status=status.HTTP_404_NOT_FOUND)
 
-# class JoinLobby(APIView):
-#     serializer_class = LobbySerializer
+class JoinLobbyRequest(generics.CreateAPIView):
+    queryset = JoinRequest.objects.all()
+    serializer_class = JoinRequestSerializer
+    permission_classes = [IsAuthenticated]
 
+    def create(self, request, *args, **kwargs):
+        user = request.user
+        lobby_id = request.data.get('lobby')
+        
+        # Check if the lobby exists and is active
+        try:
+            lobby = BaseLobby.objects.get(lobbyID=lobby_id, is_active=True)
+        except BaseLobby.DoesNotExist:
+            return Response({'error': 'Lobby not found or not active'}, status=status.HTTP_404_NOT_FOUND)
+        
+        # Create a join request
+        join_request = JoinRequest.objects.create(lobby=lobby, user=user)
+        serializer = self.get_serializer(join_request)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+class ApproveJoinRequest(generics.UpdateAPIView):
+    queryset = JoinRequest.objects.all()
+    serializer_class = JoinRequestSerializer
+    permission_classes = [IsAuthenticated]
+
+    def update(self, request, *args, **kwargs):
+        join_request = self.get_object()
+        if join_request.lobby.host != request.user:
+            return Response({'error': 'Only the host can approve join requests'}, status=status.HTTP_403_FORBIDDEN)
+        
+        if join_request.approve():
+            serializer = self.get_serializer(join_request)
+            return Response(serializer.data)
+        return Response({'error': 'Lobby is full or other issue'}, status=status.HTTP_400_BAD_REQUEST)
